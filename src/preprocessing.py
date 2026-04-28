@@ -1,9 +1,9 @@
 import collections
 import os
 
-def clean_text_for_clm(input_path, output_path, min_freq=10):
+def clean_text_for_clm(input_path, output_path, min_freq=30):
     """
-    Cleans the input text for character-level language modeling.
+    cleans the input text for character-level language modeling
     """
 
     if not os.path.exists(input_path):
@@ -19,13 +19,16 @@ def clean_text_for_clm(input_path, output_path, min_freq=10):
     
     # define a whitelist of essential characters
     whitelist = set("abcdefghijklmnopqrstuvwxyz0123456789 .,!?'-\n")
+
+    # find frequency of each letter
+    freq = collections.Counter(text)
     
-    # 5. filter characters based on whitelist 
+    # filter characters based on whitelist 
     cleaned_chars = []
     dropped_chars = set()
 
     for char in text:
-        if char in whitelist:
+        if char in whitelist and freq[char] > min_freq:
             cleaned_chars.append(char)
         else:
             dropped_chars.add(char)

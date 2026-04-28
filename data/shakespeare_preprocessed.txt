@@ -20845,7 +20845,7 @@ come, cousin you shall be the messenger.
 
 exeter
 and i, i hope, shall reconcile them all.
-3 king henry vi
+ king henry vi
 
 richard
 brother, though i be youngest, give me leave.
@@ -20973,7 +20973,7 @@ i doubt not, uncle, of our victory.
 many a battle have i won in france,
 when as the enemy hath been ten to one
 why should i not now have the like success?
-3 king henry vi
+ king henry vi
 
 rutland
 ah, whither shall i fly to 'scape their hands?
@@ -21063,7 +21063,7 @@ plantagenet! i come, plantagenet!
 and this thy son's blood cleaving to my blade
 shall rust upon my weapon, till thy blood,
 congeal'd with this, do make me wipe off both.
-3 king henry vi
+ king henry vi
 
 york
 the army of the queen hath got the field
@@ -21295,7 +21295,7 @@ my soul flies through these wounds to seek out thee.
 queen margaret
 off with his head, and set it on york gates
 so york may overlook the town of york.
-3 king henry vi
+ king henry vi
 
 edward
 i wonder how our princely father 'scaped,
@@ -21569,7 +21569,7 @@ and craves your company for speedy counsel.
 
 warwick
 why then it sorts, brave warriors, let's away.
-3 king henry vi
+ king henry vi
 
 queen margaret
 welcome, my lord, to this brave town of york.
@@ -21843,7 +21843,7 @@ stay, edward.
 edward
 no, wrangling woman, we'll no longer stay
 these words will cost ten thousand lives this day.
-3 king henry vi
+ king henry vi
 
 warwick
 forspent with toil, as runners with a race,
@@ -21922,7 +21922,7 @@ as victors wear at the olympian games
 this may plant courage in their quailing breasts
 for yet is hope of life and victory.
 forslow no longer, make we hence amain.
-3 king henry vi
+ king henry vi
 
 richard
 now, clifford, i have singled thee alone
@@ -21942,7 +21942,7 @@ and so, have at thee!
 richard
 nay warwick, single out some other chase
 for i myself will hunt this wolf to death.
-3 king henry vi
+ king henry vi
 
 king henry vi
 this battle fares like to the morning's war,
@@ -22118,7 +22118,7 @@ king henry vi
 nay, take me with thee, good sweet exeter
 not that i fear to stay, but love to go
 whither the queen intends. forward away!
-3 king henry vi
+ king henry vi
 
 clifford
 here burns my candle out ay, here it dies,
@@ -22280,7 +22280,7 @@ warwick
 tut, that's a foolish observation
 richard, be duke of gloucester. now to london,
 to see these honours in possession.
-3 king henry vi
+ king henry vi
 
 first keeper
 under this thick-grown brake we'll shroud ourselves
@@ -22438,7 +22438,7 @@ king henry vi
 in god's name, lead your king's name be obey'd
 and what god will, that let your king perform
 and what he will, i humbly yield unto.
-3 king henry vi
+ king henry vi
 
 king edward iv
 brother of gloucester, at saint alban's field
@@ -22769,7 +22769,7 @@ change shapes with proteus for advantages,
 and set the murderous machiavel to school.
 can i do this, and cannot get a crown?
 tut, were it farther off, i'll pluck it down.
-3 king henry vi
+ king henry vi
 
 king lewis xi
 fair queen of england, worthy margaret,
@@ -23170,7 +23170,7 @@ i was the chief that raised him to the crown,
 and i'll be chief to bring him down again
 not that i pity henry's misery,
 but seek revenge on edward's mockery.
-3 king henry vi
+ king henry vi
 
 gloucester
 now tell me, brother clarence, what think you
@@ -23415,7 +23415,7 @@ king edward iv
 why, so! then am i sure of victory.
 now therefore let us hence and lose no hour,
 till we meet warwick with his foreign power.
-3 king henry vi
+ king henry vi
 
 warwick
 trust me, my lord, all hitherto goes well
@@ -23451,7 +23451,7 @@ you that will follow me to this attempt,
 applaud the name of henry with your leader.
 why, then, let's on our way in silent sort
 for warwick and his friends, god and saint george!
-3 king henry vi
+ king henry vi
 
 first watchman
 come on, my masters, each man take his stand
@@ -23563,7 +23563,7 @@ warwick
 ay, that's the first thing that we have to do
 to free king henry from imprisonment
 and see him seated in the regal throne.
-3 king henry vi
+ king henry vi
 
 rivers
 madam, what makes you in this sudden change?
@@ -23619,7 +23619,7 @@ to save at least the heir of edward's right
 there shall i rest secure from force and fraud.
 come, therefore, let us fly while we may fly
 if warwick take us we are sure to die.
-3 king henry vi
+ king henry vi
 
 gloucester
 now, my lord hastings and sir william stanley,
@@ -23676,7 +23676,7 @@ come then, away let's ha' no more ado.
 king edward iv
 bishop, farewell shield thee from warwick's frown
 and pray that i may repossess the crown.
-3 king henry vi
+ king henry vi
 
 king henry vi
 master lieutenant, now that god and friends
@@ -23830,7 +23830,7 @@ ay, for if edward repossess the crown,
 somerset
 it shall be so he shall to brittany.
 come, therefore, let's about it speedily.
-3 king henry vi
+ king henry vi
 
 king edward iv
 now, brother richard, lord hastings, and the rest,
@@ -23980,7 +23980,7 @@ to flatter henry and forsake thy brother!
 yet, as we may, we'll meet both thee and warwick.
 come on, brave soldiers doubt not of the day,
 and, that once gotten, doubt not of large pay.
-3 king henry vi
+ king henry vi
 
 warwick
 what counsel, lords? edward from belgia,
@@ -24079,7 +24079,7 @@ gloucester
 away betimes, before his forces join,
 and take the great-grown traitor unawares
 brave warriors, march amain towards coventry.
-3 king henry vi
+ king henry vi
 
 warwick
 where is the post that came from valiant oxford?
@@ -24283,7 +24283,7 @@ and bid thee battle, edward, if thou darest.
 king edward iv
 yes, warwick, edward dares, and leads the way.
 lords, to the field saint george and victory!
-3 king henry vi
+ king henry vi
 
 king edward iv
 so, lie thou there die thou, and die our fear
@@ -24348,7 +24348,7 @@ for warwick bids you all farewell to meet in heaven.
 
 oxford
 away, away, to meet the queen's great power!
-3 king henry vi
+ king henry vi
 
 king edward iv
 thus far our fortune keeps an upward course,
@@ -24381,7 +24381,7 @@ will thither straight, for willingness rids way
 and, as we march, our strength will be augmented
 in every county as we go along.
 strike up the drum cry 'courage!' and away.
-3 king henry vi
+ king henry vi
 
 queen margaret
 great lords, wise men ne'er sit and wail their loss,
@@ -24490,7 +24490,7 @@ his statutes cancell'd and his treasure spent
 and yonder is the wolf that makes this spoil.
 you fight in justice then, in god's name, lords,
 be valiant and give signal to the fight.
-3 king henry vi
+ king henry vi
 
 king edward iv
 now here a period of tumultuous broils.
@@ -24663,7 +24663,7 @@ now march we hence discharge the common sort
 with pay and thanks, and let's away to london
 and see our gentle queen how well she fares
 by this, i hope, she hath a son for me.
-3 king henry vi
+ king henry vi
 
 gloucester
 good day, my lord. what, at your book so hard?
@@ -24787,7 +24787,7 @@ clarence, thy turn is next, and then the rest,
 counting myself but bad till i be best.
 i'll throw thy body in another room
 and triumph, henry, in thy day of doom.
-3 king henry vi
+ king henry vi
 
 king edward iv
 once more we sit in england's royal throne,
