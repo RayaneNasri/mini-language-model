@@ -13,29 +13,41 @@ class CharTokenizer:
         self.int_to_char = {index: char for char, index in self.char_to_int.items()}
 
     
-    def encode(self, text: str, context_window=5) -> torch.Tensor:
+    def encode(self, text: str, context_window=5, sequential=False) -> tuple[torch.tensor, torch.tensor]:
         """
-        Encodes the input text into a dataset of sliding windows.
-        
-        This method creates sequences of length (context_window + 1). 
-        For example, if context_window=5, it returns rows of 6 integers 
-        where the first 5 are the inputs (X) and the 6th is the target label (Y).
+            Prepares and encodes input and target sequences from raw text.
+            This function extracts text windows to prepare data for language model training.
 
-        Args:
-            text (str): The raw text string to encode.
-            context_window (int, optional): The number of characters used as context 
-                                            to predict the next one. Defaults to 5.
+            Args:
+                text (str): The raw text data to encode.
+                context_window (int): The size of the context window (sequence length).
+                sequential (bool): Indicates whether to generate sequential targets 
+                                    or a single target.
 
-        Returns:
-            torch.Tensor: A 2D tensor containing the encoded text windows. 
-                          Shape: (number_of_windows, context_window + 1)
+            Returns:
+                tuple[torch.Tensor, torch.Tensor]: A tuple containing:
+                    - features: The input tensor of shape (N, context_window).
+                    - targets: The target tensor of shape (N,) or (N, context_window) depending on the mode.
         """
-        data = [] # Dataset to return
+
+        features = []
+        targets = []
+
         length = len(text)
 
         for i in range(length - context_window):
-            token = text[i:i + context_window + 1]
-            token_encoded = [self.char_to_int[char] for char in token]
-            data.append(token_encoded)
+
+            # building the features data --
+            feature = text[i:i + context_window]
+            feature_encoded = [self.char_to_int[char] for char in feature]
+            features.append(feature_encoded)
+
+            # building the targets data --
+            if sequential :
+                target = text[i+1 : i+context_window+1]
+                target_encoded = [self.char_to_int[char] for char in target]
+                targets.append(target_encoded)
+            else :
+                targets.append( self.char_to_int[ text[i+context_window] ] )
         
-        return torch.tensor(data)
+        return torch.tensor(features, dtype=torch.long), torch.tensor(targets, dtype=torch.long)
