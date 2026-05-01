@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 class MiniLLM_FFNN(nn.Module):
     """
@@ -92,6 +91,7 @@ class MiniLLM_RNN(nn.Module):
                  hidden_size: int = 128,
                  num_layers: int = 1,
                  hidden_activation: str = 'tanh',
+                 dropout: float = 0.2,
                  device='cpu'):
         
         super(MiniLLM_RNN, self).__init__()
@@ -112,7 +112,13 @@ class MiniLLM_RNN(nn.Module):
         # transforms the embedded vector to the memory state of the rnn
         # input shape [batch, seq_length, embedding_dim]
         # output shape [batch, seq_length, hidden_size]  
-        self.rnn = nn.RNN(input_size=embedding_dim, hidden_size=hidden_size, num_layers=num_layers, nonlinearity=hidden_activation, batch_first=True, device=self.device)
+        self.rnn = nn.RNN(input_size=embedding_dim, 
+                          hidden_size=hidden_size, 
+                          num_layers=num_layers, 
+                          nonlinearity=hidden_activation,
+                          dropout=dropout,
+                          batch_first=True, 
+                          device=self.device)
 
         # fc layer --
         # apply the final linear layer to get vocabulary logits
