@@ -68,8 +68,6 @@ class Mlm(nn.Module, ABC):
 
         total_batches = len(train_loader)
 
-        colorama.init(autoreset=True)
-
         # -- Overfitting manager
         last_validation_acc = 0.0
         
@@ -121,7 +119,7 @@ class Mlm(nn.Module, ABC):
             if epoch % 10 == 0 :
 
                 # ---- validation ----
-                print(Fore.YELLOW + "-- Validation --")
+                print(Fore.YELLOW + "-- Validation --" + Fore.RESET)
 
                 self.eval()
                 with torch.no_grad():
@@ -139,16 +137,16 @@ class Mlm(nn.Module, ABC):
                 acc_validation = (val_correct_preds / val_total_samples) * 100
 
                 if acc_validation > last_validation_acc :
-                    print(Fore.GREEN + f"=== Saving model with a validation accuracy of {acc_validation:.4f}% ===")
+                    print(Fore.GREEN + f"\n=== Saving model with a validation accuracy of {acc_validation:.4f}% ===\n" + Fore.RESET)
                     torch.save(self.state_dict(), f"{params_dir}model_{epoch}.pth")
                     last_validation_acc = acc_validation
 
                 else :
-                    print(Fore.RED + f"=== Model has a lower validation accuracy {acc_validation:.4f}% then the last one {last_validation_acc:.4f}% ===")
+                    print(Fore.RED + f"\n=== Model has a lower validation accuracy {acc_validation:.4f}% then the last one {last_validation_acc:.4f}% ===\n" + Fore.RESET)
                     return
                 # ----------------------
 
-        print(Fore.GREEN + f"=== Saving the final model ===")
+        print(Fore.GREEN + f"\n=== Saving the final model ===\n" + Fore.RESET)
         torch.save(self.state_dict(), f"{params_dir}model_final.pth")
 
 class Mlm_FFNN(Mlm):
