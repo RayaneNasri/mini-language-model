@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-class MiniLLM_FFNN(nn.Module):
+class Mlm_FFNN(nn.Module):
     """
     A Feed-Forward Neural Network (Baseline) for character-level language modeling.
     
@@ -18,7 +18,7 @@ class MiniLLM_FFNN(nn.Module):
                  hidden_activation = torch.tanh, 
                  device='cpu'):
         
-        super(MiniLLM_FFNN, self).__init__()
+        super(Mlm_FFNN, self).__init__()
         
         # building the neural network
 
@@ -66,40 +66,48 @@ class MiniLLM_FFNN(nn.Module):
 
         return out
     
-class MiniLLM_RNN(nn.Module):
+class Mlm_RM(nn.Module):
     """
-        A Character-Level Recurrent Neural Network for next-token prediction.
+        A Multi-Model Character-Level Language Model supporting RNN, GRU, and LSTM.
 
-        This model uses an Embedding layer followed by an RNN and a Linear layer 
-        to process sequences of characters and output logits for the next character 
-        at each time step (Many-to-Many architecture).
+        This architecture dynamically instantiates the chosen recurrent layer type
+        to process sequences of characters and output logits for next-token prediction 
+        in a Many-to-Many configuration.
 
         Args:
+            model_type (str): The type of recurrent layer to use. Must be 'rnn', 'gru', or 'lstm'.
             window (int): The length of the input sequences (context window).
             vocab_size (int): The total number of unique characters in the vocabulary.
-            embedding_dim (int, optional): The size of the dense vector space for characters. Defaults to 16.
-            hidden_size (int, optional): The number of features in the RNN hidden state. Defaults to 128.
-            num_layers (int, optional): The number of recurrent layers. Defaults to 1.
-            hidden_activation (str, optional): The non-linearity to use ('tanh' or 'relu'). Defaults to 'tanh'.
-            device (str, optional): The device on which to initialize the layers ('cpu' or 'cuda'). Defaults to 'cpu'.
+            embedding_dim (int, optional): The dimension of the character embeddings. Defaults to 16.
+            hidden_size (int, optional): The number of features in the hidden state. Defaults to 128.
+            num_layers (int, optional): The number of stacked recurrent layers. Defaults to 2.
+            dropout (float, optional): The dropout probability applied between recurrent layers. Defaults to 0.2.
+            device (str, optional): The device to run the model on ('cpu' or 'cuda'). Defaults to 'cpu'.
     """
 
-    def __init__(self, 
+    def __init__(self,
+                 model_type: str,
                  window: int,
                  vocab_size: int,
                  embedding_dim: int = 16,
                  hidden_size: int = 128,
-                 num_layers: int = 1,
-                 hidden_activation: str = 'tanh',
+                 num_layers: int = 2,
                  dropout: float = 0.2,
                  device='cpu'):
         
-        super(MiniLLM_RNN, self).__init__()
+        super(Mlm_RM, self).__init__()
 
+        self.model_type = model_type
         self.seq_length = window
         self.num_layers = num_layers
         self.hidden_size = hidden_size
         self.device = device
+
+        rnn_classes = {
+            'rnn': nn.RNN,
+            'gru': nn.GRU,
+            'lstm': nn.LSTM
+        }
 
         # building the neural network
 
@@ -108,17 +116,16 @@ class MiniLLM_RNN(nn.Module):
         # output shape [batch, seq_length, embedding_dim]
         self.embedding = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_dim, device=self.device)
 
-        # rnn layer --
+        # rnn / gru / lstm layer --
         # transforms the embedded vector to the memory state of the rnn
         # input shape [batch, seq_length, embedding_dim]
         # output shape [batch, seq_length, hidden_size]  
-        self.rnn = nn.RNN(input_size=embedding_dim, 
-                          hidden_size=hidden_size, 
-                          num_layers=num_layers, 
-                          nonlinearity=hidden_activation,
-                          dropout=dropout,
-                          batch_first=True, 
-                          device=self.device)
+        self.rnn = rnn_classes[self.model_type](input_size=embedding_dim, 
+                                                hidden_size=hidden_size, 
+                                                num_layers=num_layers, 
+                                                dropout=dropout,
+                                                batch_first=True, 
+                                                device=self.device)
 
         # fc layer --
         # apply the final linear layer to get vocabulary logits
@@ -141,11 +148,25 @@ class MiniLLM_RNN(nn.Module):
         batch_size = x.size(0)
 
         h0: torch.Tensor = torch.zeros(self.num_layers, batch_size, self.hidden_size, device=self.device)
+        c0: torch.Tensor
 
+        # -- embedding --
         out = self.embedding(x)
-        out, _ = self.rnn(out, h0)
-        out = self.fc(out)
+        # ---------------
 
+        # -- rnn --
+        if self.model_type == 'lstm':
+            c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size, device=self.device) 
+            out, _ = self.rnn(out, (h0, c0))
+        else:
+            out, _ = self.rnn(out, h0)
+        # ---------
+
+        # -- last layer --
+        out = self.fc(out)
+        # ----------------
+
+        # flatten to match the CrossEntropyLoss format 
         out = out.view(batch_size * self.seq_length, -1)
 
         return out
