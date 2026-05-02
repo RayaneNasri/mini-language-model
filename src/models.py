@@ -216,7 +216,7 @@ class Mlm_FFNN(Mlm):
 
         return out
     
-class Mlm_RM(nn.Module):
+class Mlm_RM(Mlm):
     """
         A Multi-Model Character-Level Language Model supporting RNN, GRU, and LSTM.
 
