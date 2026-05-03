@@ -193,5 +193,4 @@ __marimo__/
 
 # Others
 docs/
-*.ipynb
-config.py
+config.txt

@@ -6,7 +6,6 @@ from torch.utils.data import DataLoader
 
 # verbose -- 
 from tqdm import tqdm 
-import colorama
 from colorama import Fore
 
 # others --
@@ -235,7 +234,6 @@ class Mlm_RM(Mlm):
 
     def __init__(self,
                  model_type: str,
-                 window: int,
                  vocab_size: int,
                  embedding_dim: int = 16,
                  hidden_size: int = 128,
@@ -246,7 +244,6 @@ class Mlm_RM(Mlm):
         super(Mlm_RM, self).__init__(device=device)
 
         self.model_type = model_type
-        self.seq_length = window
         self.num_layers = num_layers
         self.hidden_size = hidden_size
         self.device = device
@@ -294,6 +291,7 @@ class Mlm_RM(Mlm):
                             ready for CrossEntropyLoss computation.
         """
         batch_size = x.size(0)
+        seq_length = x.size(1)
 
         h0: torch.Tensor = torch.zeros(self.num_layers, batch_size, self.hidden_size, device=self.device)
         c0: torch.Tensor
@@ -315,6 +313,51 @@ class Mlm_RM(Mlm):
         # ----------------
 
         # flatten to match the CrossEntropyLoss format 
-        out = out.view(batch_size * self.seq_length, -1)
+        out = out.view(batch_size * seq_length, -1)
 
         return out
+    
+    def generate(self, 
+                seed: str, 
+                char_to_int: dict, 
+                int_to_char: dict, 
+                max_length: int = 100,
+                max_seq_length: int = 64, 
+                temperature: float = 1.0) -> str:
+            """
+            Generates text character by character using the trained model.
+
+            Args:
+                seed (str): The initial string to start generating from.
+                char_to_int (dict): Vocabulary mapping characters to integers.
+                int_to_char (dict): Vocabulary mapping integers back to characters.
+                max_length (int, optional): Number of characters to generate. Defaults to 100.
+                temperature (float, optional): Controls the randomness of predictions. 
+                                               Higher = more creative, Lower = more predictable. Defaults to 1.0.
+
+            Returns:
+                str: The fully generated text (seed + new characters).
+            """
+            self.eval()
+            sequence = [char_to_int[c] for c in seed]
+            text = seed
+
+            with torch.no_grad():
+                for _ in range(max_length):
+
+                    # output shape : (vocab_size) -- 
+                    logits = self( torch.tensor(sequence[-max_seq_length:], dtype=torch.long).to(self.device).unsqueeze(dim=0) )[-1, :]
+
+                    # temperature application --
+                    p = torch.softmax(logits / temperature, dim=-1)
+
+                    # sampling --
+                    index = torch.multinomial(p, num_samples=1).item()
+
+                    # add to context
+                    sequence.append(index)
+
+                    # decode --
+                    text += int_to_char[index]
+        
+            return text
